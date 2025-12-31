@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        background-color: #FDFCF8;
+        color: #4E4E4E;
+        font-family: 'Times New Roman', Times, serif;
+        /* Subtle Grid Texture */
+        background-image:
+            linear-gradient(#E8E0D5 1px, transparent 1px),
+            linear-gradient(90deg, #E8E0D5 1px, transparent 1px);
+        background-size: 20px 20px;
+    }
+
+    /* Custom Font Classes */
+    .font-heading {
+        font-family: 'Playfair Display', serif;
+    }
+}
+
+.vintage-shadow {
+    box-shadow: 0 4px 6px -1px rgba(62, 39, 35, 0.1), 0 2px 4px -1px rgba(62, 39, 35, 0.06);
+}
+
+/* Double Border Class */
+.border-vintage-double {
+    border: 4px double #8D6E63;
+}

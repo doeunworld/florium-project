@@ -1,0 +1,30 @@
+.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+}
+
+input[type="checkbox"]:checked {
+    background-color: #4a6741;
+    border-color: #4a6741;
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuCLOpek4_kV65bsfi8OipKm9RVAlq65WnpSi1E0aKg6L8HffA2pfEduDvbyOjzAHL-MfHHz_gpnDPxss5htIHWwQd0k3uJ3pKowcHhJPdBBmhxoz0Iu-Jip9pGk1vbWEygGYH3AYmgJagYurJPO8AFHZyDUZiH9KBjmHHQZk7zkZU82FPmEkmz4l2HW78SPZJqAzJJtZRyB1Ea5NKiM86QeKq0Avhz787RUaWYrUMtYmOauB5OQuNXYh_JllHs3eq4e61OH0NMZ0zs)
+}
+
+input[type="checkbox"] {
+    border-radius: 50%;
+}
+
+.vintage-border {
+    border: 1px solid #dcd9ce;
+    box-shadow: inset 0 0 20px rgba(166, 156, 134, 0.1)
+}
+
+.dashed-line {
+    background-image: linear-gradient(to bottom, #4a6741 33%, rgba(255, 255, 255, 0) 0%);
+    background-position: right;
+    background-size: 1px 10px;
+    background-repeat: repeat-y;
+}
+
+/* Global body style from original HTML */
+body {
+    min-height: max(884px, 100dvh);
+}
