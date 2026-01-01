@@ -1,30 +1,16 @@
+/* src/styles.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-    body {
-        background-color: #FDFCF8;
-        color: #4E4E4E;
-        font-family: 'Times New Roman', Times, serif;
-        /* Subtle Grid Texture */
-        background-image:
-            linear-gradient(#E8E0D5 1px, transparent 1px),
-            linear-gradient(90deg, #E8E0D5 1px, transparent 1px);
-        background-size: 20px 20px;
-    }
-
-    /* Custom Font Classes */
-    .font-heading {
-        font-family: 'Playfair Display', serif;
-    }
+/* 빈티지 보더 스타일 */
+.vintage-border {
+    border: 1px solid #dcd9ce;
+    box-shadow: inset 0 0 20px rgba(166, 156, 134, 0.1);
 }
 
-.vintage-shadow {
-    box-shadow: 0 4px 6px -1px rgba(62, 39, 35, 0.1), 0 2px 4px -1px rgba(62, 39, 35, 0.06);
-}
-
-/* Double Border Class */
-.border-vintage-double {
-    border: 4px double #8D6E63;
+/* 점선 스타일 */
+.dashed-line {
+    background-image: linear-gradient(to bottom, #4a6741 50%, transparent 50%);
+    background-size: 1px 10px;
 }
