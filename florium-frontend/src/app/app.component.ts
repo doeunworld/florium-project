@@ -1,17 +1,51 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http'; // HttpClientModule 추가
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { IonApp, IonContent, IonHeader, IonFooter, IonToolbar, IonTitle, IonButton, IonInput, IonItem, IonLabel, IonList, IonTabs, IonTabBar, IonTabButton, IonIcon, IonSelect, IonSelectOption } from '@ionic/angular/standalone';
 
 @Component({
     selector: 'app-root',
     standalone: true,
     // 💡 아래 imports에 HttpClientModule이 들어있는지 꼭 확인하세요!
-    imports: [CommonModule, FormsModule, HttpClientModule],
+    imports: [CommonModule, FormsModule, HttpClientModule, IonApp, IonContent, IonHeader, IonFooter, IonToolbar, IonTitle, IonButton, IonInput, IonItem, IonLabel, IonList, IonTabs, IonTabBar, IonTabButton, IonIcon, IonSelect, IonSelectOption],
     templateUrl: './app.component.html',
     styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
+
+    // 입력창을 열고 닫는 상태 변수
+    isAdding = false;
+
+    // 새로 추가할 식물 정보 (초기값)
+    newPlant = {
+        name: '',
+        latin: '',
+        status: 'Healthy',
+        image: '',
+        lastWatered: 'Just now'
+    };
+
+    // 입력창 열기/닫기 함수
+    toggleAddForm() {
+        this.isAdding = !this.isAdding;
+    }
+
+    // 백엔드에 저장 요청하는 함수
+    addPlant() {
+        this.http.post('http://192.168.45.227:3000/plants', this.newPlant).subscribe({
+            next: (result) => {
+                console.log('추가 성공!', result);
+                this.fetchPlants(); // 목록 새로고침
+                this.isAdding = false; // 입력창 닫기
+                // 입력창 초기화
+                this.newPlant = { name: '', latin: '', status: 'Healthy', image: '', lastWatered: 'Just now' };
+            },
+            error: (err) => console.error('추가 실패ㅠㅠ', err)
+        });
+    }
+
+
     private http = inject(HttpClient);
 
     dayName = 'Wednesday';
@@ -28,7 +62,7 @@ export class AppComponent implements OnInit {
 
     fetchPlants() {
         // 💡 주소가 정확한지 다시 확인 (http://localhost:3000/plants)
-        this.http.get<any[]>('http://localhost:3000/plants').subscribe({
+        this.http.get<any[]>('http://192.168.45.227:3000/plants').subscribe({
             next: (data) => {
                 this.plants = data;
                 console.log('백엔드 데이터 수신 성공:', data);

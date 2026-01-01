@@ -1,145 +1,218 @@
-<div
-    class="relative flex h-full min-h-screen w-full flex-col overflow-x-hidden pb-24 max-w-md mx-auto bg-background-light dark:bg-background-dark bg-paper-texture border-x border-paper-border dark:border-gray-800 shadow-2xl">
-    <header
-        class="sticky top-0 z-50 flex items-center bg-background-light/90 dark:bg-background-dark/95 backdrop-blur-sm p-4 pb-2 justify-between border-b border-paper-border dark:border-gray-800">
-        <button
-            class="text-text-main dark:text-gray-200 flex size-12 shrink-0 items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
-            <span class="material-symbols-outlined">menu</span>
-        </button>
-        <h2
-            class="text-text-main dark:text-gray-200 text-xl font-display font-bold italic tracking-wide flex-1 text-center">
-            Botanical Journal</h2>
-        <div class="flex w-12 items-center justify-end">
+<ion-app>
+    <ion-header class="ion-no-border">
+        <header
+            class="flex items-center bg-background-light/90 dark:bg-background-dark/95 backdrop-blur-sm p-4 pb-2 justify-between border-b border-paper-border dark:border-gray-800">
             <button
-                class="flex size-12 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-transparent text-text-main dark:text-gray-200 transition-colors hover:bg-black/5 dark:hover:bg-white/10">
-                <span class="material-symbols-outlined">notifications</span>
+                class="text-text-main dark:text-gray-200 flex size-12 shrink-0 items-center justify-center rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
+                <span class="material-symbols-outlined">menu</span>
             </button>
-        </div>
-    </header>
+            <h2
+                class="text-text-main dark:text-gray-200 text-xl font-display font-bold italic tracking-wide flex-1 text-center">
+                Botanical Journal</h2>
+            <div class="flex w-12 items-center justify-end">
+                <button
+                    class="flex size-12 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-transparent text-text-main dark:text-gray-200 transition-colors hover:bg-black/5 dark:hover:bg-white/10">
+                    <span class="material-symbols-outlined">notifications</span>
+                </button>
+            </div>
+        </header>
+    </ion-header>
 
-    <div class="pt-8 px-8 relative">
-        <div class="absolute top-6 left-6 w-8 h-8 border-t border-l border-primary/30"></div>
-        <p class="text-primary font-display italic text-lg mb-1 opacity-80">Daily Overview</p>
-        <h2 class="text-text-main dark:text-gray-100 tracking-tight text-4xl font-display font-bold leading-tight">
-            {{ dayName }},<br />
-            <span class="text-2xl font-sans font-normal text-text-muted mt-1 block">{{ todaysDate }}</span>
-        </h2>
-    </div>
+    <ion-content [fullscreen]="true" class="bg-background-light dark:bg-background-dark bg-paper-texture">
+        <div class="flex flex-col overflow-x-hidden pb-24 max-w-md mx-auto min-h-full">
+            <div class="pt-8 px-8 relative">
+                <div class="absolute top-6 left-6 w-8 h-8 border-t border-l border-primary/30"></div>
+                <p class="text-primary font-display italic text-lg mb-1 opacity-80">Daily Overview</p>
+                <h2
+                    class="text-text-main dark:text-gray-100 tracking-tight text-4xl font-display font-bold leading-tight">
+                    {{ dayName }},<br />
+                    <span class="text-2xl font-sans font-normal text-text-muted mt-1 block">{{ todaysDate }}</span>
+                </h2>
+            </div>
 
-    <div class="mt-10 px-8 flex justify-between items-end border-b border-paper-border pb-2 mx-4">
-        <h3 class="text-text-main dark:text-gray-200 text-lg font-display font-bold tracking-wide uppercase">Care Notes
-        </h3>
-        <span class="text-xs text-text-muted dark:text-gray-400 font-serif italic">{{ tasks.length }} pending</span>
-    </div>
-
-    <div
-        class="mx-6 mt-6 bg-surface-light dark:bg-surface-dark rounded-sm shadow-journal border border-paper-border dark:border-gray-700 overflow-hidden relative vintage-border transform rotate-[-1deg] hover:rotate-0 transition-transform duration-300">
-        <div class="absolute left-0 top-0 bottom-0 w-2 bg-primary/20 border-r border-primary/10 dashed-line"></div>
-        <div class="px-6 py-4 pl-8">
-            <label *ngFor="let task of tasks"
-                class="flex gap-x-4 py-3 flex-row items-center border-b border-dashed border-gray-300 dark:border-gray-600 group cursor-pointer last:border-0">
-                <div class="relative flex items-center">
-                    <input [(ngModel)]="task.done"
-                        class="peer h-5 w-5 border-gray-400 dark:border-gray-500 border bg-transparent text-primary focus:ring-0 focus:ring-offset-0 focus:outline-none transition-all"
-                        type="checkbox" />
-                </div>
-                <div class="flex flex-col">
-                    <p
-                        class="text-text-main dark:text-gray-200 text-lg font-display peer-checked:line-through peer-checked:text-gray-400">
-                        {{ task.title }}</p>
-                    <p class="text-text-muted dark:text-gray-500 text-xs font-sans tracking-wide">{{ task.plantName }} •
-                        {{ task.status }}</p>
-                </div>
-            </label>
-            <p *ngIf="tasks.length === 0" class="text-text-muted italic text-center py-4">No tasks for today.</p>
-        </div>
-    </div>
-
-    <div class="mt-10 px-8 flex justify-between items-center border-b border-paper-border pb-2 mx-4">
-        <h3 class="text-text-main dark:text-gray-200 text-lg font-display font-bold tracking-wide uppercase">Specimens
-        </h3>
-        <button class="text-primary hover:text-primary-dark text-xs font-serif italic hover:underline">See
-            index</button>
-    </div>
-
-    <div class="grid grid-cols-2 gap-6 px-6 mt-6">
-        <div *ngFor="let plant of plants; let i = index"
-            class="group relative flex flex-col bg-surface-light dark:bg-surface-dark shadow-journal border border-white dark:border-gray-700 p-2 pb-4 transition-transform hover:-translate-y-1"
-            [class.mt-4]="i % 2 !== 0">
-
-            <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-6 bg-yellow-100/40 backdrop-blur-sm shadow-sm z-30 border-l border-r border-white/20"
-                [class.rotate-1]="i % 2 === 0" [class.-rotate-2]="i % 2 !== 0"></div>
+            <div class="mt-10 px-8 flex justify-between items-end border-b border-paper-border pb-2 mx-4">
+                <h3 class="text-text-main dark:text-gray-200 text-lg font-display font-bold tracking-wide uppercase">
+                    Care
+                    Notes
+                </h3>
+                <span class="text-xs text-text-muted dark:text-gray-400 font-serif italic">{{ tasks.length }}
+                    pending</span>
+            </div>
 
             <div
-                class="relative aspect-[4/5] w-full overflow-hidden bg-gray-100 border border-gray-200 dark:border-gray-600 grayscale-[20%] group-hover:grayscale-0 transition-all duration-500">
-                <span
-                    class="absolute top-2 right-2 z-20 bg-surface-light/90 dark:bg-surface-dark/90 backdrop-blur text-[10px] font-bold px-2 py-0.5 border shadow-sm font-serif"
-                    [class.text-primary]="plant.status === 'Healthy'"
-                    [class.border-primary]="plant.status === 'Healthy'"
-                    [class.text-orange-700]="plant.status !== 'Healthy'"
-                    [class.border-orange-500]="plant.status !== 'Healthy'">
-                    {{ plant.status }}
-                </span>
-                <img [src]="plant.image" [alt]="plant.name"
-                    class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110 sepia-[10%] group-hover:sepia-0">
-            </div>
-
-            <div class="pt-3 px-1 flex flex-col items-center text-center gap-1">
-                <h4 class="text-text-main dark:text-gray-200 font-display font-bold text-lg leading-tight">{{ plant.name
-                    }}</h4>
-                <p
-                    class="text-text-muted dark:text-gray-400 text-[10px] italic font-serif border-t border-gray-300 dark:border-gray-600 pt-1 w-1/2">
-                    {{ plant.latin }}
-                </p>
-                <div
-                    class="mt-1 flex items-center gap-1 text-[10px] text-text-muted dark:text-gray-400 font-sans tracking-wide">
-                    <span class="material-symbols-outlined text-[14px]">water_drop</span>
-                    <span>{{ plant.lastWatered }}</span>
+                class="mx-6 mt-6 bg-surface-light dark:bg-surface-dark rounded-sm shadow-journal border border-paper-border dark:border-gray-700 overflow-hidden relative vintage-border transform rotate-[-1deg] hover:rotate-0 transition-transform duration-300">
+                <div class="absolute left-0 top-0 bottom-0 w-2 bg-primary/20 border-r border-primary/10 dashed-line">
+                </div>
+                <div class="px-6 py-4 pl-8">
+                    <label *ngFor="let task of tasks"
+                        class="flex gap-x-4 py-3 flex-row items-center border-b border-dashed border-gray-300 dark:border-gray-600 group cursor-pointer last:border-0">
+                        <div class="relative flex items-center">
+                            <input [(ngModel)]="task.done"
+                                class="peer h-5 w-5 border-gray-400 dark:border-gray-500 border bg-transparent text-primary focus:ring-0 focus:ring-offset-0 focus:outline-none transition-all"
+                                type="checkbox" />
+                        </div>
+                        <div class="flex flex-col">
+                            <p
+                                class="text-text-main dark:text-gray-200 text-lg font-display peer-checked:line-through peer-checked:text-gray-400">
+                                {{ task.title }}</p>
+                            <p class="text-text-muted dark:text-gray-500 text-xs font-sans tracking-wide">{{
+                                task.plantName }} •
+                                {{ task.status }}</p>
+                        </div>
+                    </label>
+                    <p *ngIf="tasks.length === 0" class="text-text-muted italic text-center py-4">No tasks for today.
+                    </p>
                 </div>
             </div>
-        </div>
 
-        <button
-            class="group relative flex flex-col items-center justify-center bg-transparent rounded-sm border-2 border-dashed border-gray-300 dark:border-gray-600 hover:border-primary dark:hover:border-primary transition-colors min-h-[200px] mt-4 opacity-60 hover:opacity-100">
-            <div
-                class="h-10 w-10 rounded-full border border-primary flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
-                <span class="material-symbols-outlined font-thin">add</span>
+            <div class="mt-10 px-8 flex justify-between items-center border-b border-paper-border pb-2 mx-4">
+                <h3 class="text-text-main dark:text-gray-200 text-lg font-display font-bold tracking-wide uppercase">
+                    Specimens
+                </h3>
+                <button class="text-primary hover:text-primary-dark text-xs font-serif italic hover:underline">See
+                    index</button>
             </div>
-            <span
-                class="mt-3 text-xs font-serif font-bold text-text-muted dark:text-gray-400 group-hover:text-primary uppercase tracking-widest">New
-                Entry</span>
-        </button>
-    </div>
 
-    <nav
-        class="fixed bottom-0 left-0 right-0 bg-[#fdfbf7]/95 dark:bg-[#1c1c1a]/95 backdrop-blur-md border-t border-paper-border dark:border-gray-800 pb-safe pt-2 z-50 max-w-md mx-auto">
-        <div class="flex items-center justify-around h-16">
-            <a class="flex flex-col items-center justify-center gap-1 w-full text-primary" href="#">
-                <span class="material-symbols-outlined filled">potted_plant</span>
-                <span class="text-[10px] font-bold uppercase tracking-widest font-sans">Home</span>
-            </a>
-            <a class="flex flex-col items-center justify-center gap-1 w-full text-text-muted dark:text-gray-500 hover:text-text-main dark:hover:text-white transition-colors"
-                href="#">
-                <span class="material-symbols-outlined">calendar_month</span>
-                <span class="text-[10px] font-bold uppercase tracking-widest font-sans">Journal</span>
-            </a>
-            <a class="flex flex-col items-center justify-center gap-1 w-full text-text-muted dark:text-gray-500 hover:text-text-main dark:hover:text-white transition-colors"
-                href="#">
-                <span class="material-symbols-outlined">search</span>
-                <span class="text-[10px] font-bold uppercase tracking-widest font-sans">Index</span>
-            </a>
-            <a class="flex flex-col items-center justify-center gap-1 w-full text-text-muted dark:text-gray-500 hover:text-text-main dark:hover:text-white transition-colors"
-                href="#">
-                <span class="material-symbols-outlined">settings</span>
-                <span class="text-[10px] font-bold uppercase tracking-widest font-sans">Config</span>
-            </a>
+            <div class="grid grid-cols-2 gap-6 px-6 mt-6">
+                <div *ngFor="let plant of plants; let i = index"
+                    class="group relative flex flex-col bg-surface-light dark:bg-surface-dark shadow-journal border border-white dark:border-gray-700 p-2 pb-4 transition-transform hover:-translate-y-1"
+                    [class.mt-4]="i % 2 !== 0">
+
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-6 bg-yellow-100/40 backdrop-blur-sm shadow-sm z-30 border-l border-r border-white/20"
+                        [class.rotate-1]="i % 2 === 0" [class.-rotate-2]="i % 2 !== 0"></div>
+
+                    <div
+                        class="relative aspect-[4/5] w-full overflow-hidden bg-gray-100 border border-gray-200 dark:border-gray-600 grayscale-[20%] group-hover:grayscale-0 transition-all duration-500">
+                        <span
+                            class="absolute top-2 right-2 z-20 bg-surface-light/90 dark:bg-surface-dark/90 backdrop-blur text-[10px] font-bold px-2 py-0.5 border shadow-sm font-serif"
+                            [class.text-primary]="plant.status === 'Healthy'"
+                            [class.border-primary]="plant.status === 'Healthy'"
+                            [class.text-orange-700]="plant.status !== 'Healthy'"
+                            [class.border-orange-500]="plant.status !== 'Healthy'">
+                            {{ plant.status }}
+                        </span>
+                        <img *ngIf="plant.image" [src]="plant.image" [alt]="plant.name"
+                            class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110 sepia-[10%] group-hover:sepia-0">
+                        <div *ngIf="!plant.image"
+                            class="h-full w-full flex items-center justify-center bg-gray-200 text-gray-400">
+                            <span class="material-symbols-outlined">image_not_supported</span>
+                        </div>
+                    </div>
+
+                    <div class="pt-3 px-1 flex flex-col items-center text-center gap-1">
+                        <h4 class="text-text-main dark:text-gray-200 font-display font-bold text-lg leading-tight">{{
+                            plant.name
+                            }}</h4>
+                        <p
+                            class="text-text-muted dark:text-gray-400 text-[10px] italic font-serif border-t border-gray-300 dark:border-gray-600 pt-1 w-1/2">
+                            {{ plant.latin }}
+                        </p>
+                        <div
+                            class="mt-1 flex items-center gap-1 text-[10px] text-text-muted dark:text-gray-400 font-sans tracking-wide">
+                            <span class="material-symbols-outlined text-[14px]">water_drop</span>
+                            <span>{{ plant.lastWatered }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button (click)="toggleAddForm()"
+                    class="group relative flex flex-col items-center justify-center bg-transparent rounded-sm border-2 border-dashed border-gray-300 dark:border-gray-600 hover:border-primary dark:hover:border-primary transition-colors min-h-[200px] mt-4 opacity-60 hover:opacity-100">
+                    <div
+                        class="h-10 w-10 rounded-full border border-primary flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                        <span class="material-symbols-outlined font-thin">add</span>
+                    </div>
+                    <span
+                        class="mt-3 text-xs font-serif font-bold text-text-muted dark:text-gray-400 group-hover:text-primary uppercase tracking-widest">New
+                        Entry</span>
+                </button>
+            </div>
         </div>
-    </nav>
+    </ion-content>
 
-    <div class="fixed bottom-24 right-6 z-40 max-w-md mx-auto">
-        <button
-            class="h-14 w-14 rounded-full bg-primary text-white shadow-xl flex items-center justify-center hover:scale-105 transition-transform border-4 border-[#f4f1ea] dark:border-[#2a2a26]">
+    <ion-footer class="ion-no-border">
+        <nav
+            class="bg-[#fdfbf7]/95 dark:bg-[#1c1c1a]/95 backdrop-blur-md border-t border-paper-border dark:border-gray-800 pb-safe pt-2 z-50 w-full">
+            <div class="flex items-center justify-around h-16">
+                <a class="flex flex-col items-center justify-center gap-1 w-full text-primary" href="#">
+                    <span class="material-symbols-outlined filled">potted_plant</span>
+                    <span class="text-[10px] font-bold uppercase tracking-widest font-sans">Home</span>
+                </a>
+                <a class="flex flex-col items-center justify-center gap-1 w-full text-text-muted dark:text-gray-500 hover:text-text-main dark:hover:text-white transition-colors"
+                    href="#">
+                    <span class="material-symbols-outlined">calendar_month</span>
+                    <span class="text-[10px] font-bold uppercase tracking-widest font-sans">Journal</span>
+                </a>
+                <a class="flex flex-col items-center justify-center gap-1 w-full text-text-muted dark:text-gray-500 hover:text-text-main dark:hover:text-white transition-colors"
+                    href="#">
+                    <span class="material-symbols-outlined">search</span>
+                    <span class="text-[10px] font-bold uppercase tracking-widest font-sans">Index</span>
+                </a>
+                <a class="flex flex-col items-center justify-center gap-1 w-full text-text-muted dark:text-gray-500 hover:text-text-main dark:hover:text-white transition-colors"
+                    href="#">
+                    <span class="material-symbols-outlined">settings</span>
+                    <span class="text-[10px] font-bold uppercase tracking-widest font-sans">Config</span>
+                </a>
+            </div>
+        </nav>
+    </ion-footer>
+
+    <div class="fixed bottom-24 right-6 z-40 max-w-md mx-auto pointer-events-none">
+        <button (click)="toggleAddForm()"
+            class="pointer-events-auto h-14 w-14 rounded-full bg-primary text-white shadow-xl flex items-center justify-center hover:scale-105 transition-transform border-4 border-[#f4f1ea] dark:border-[#2a2a26]">
             <span class="material-symbols-outlined">edit_note</span>
         </button>
     </div>
-</div>
+
+    <!-- Modal using absolute positioning over app (or could be ion-modal if refactored further) -->
+    <div *ngIf="isAdding"
+        class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+        <div
+            class="w-full max-w-sm bg-[#fdfbf7] dark:bg-[#1c1c1a] border-2 border-primary p-6 shadow-2xl vintage-border relative">
+            <h3 class="text-2xl font-display font-bold text-primary mb-4 italic">New Specimen</h3>
+
+            <div class="space-y-4">
+                <ion-item class="vintage-input">
+                    <ion-label position="stacked"
+                        class="font-serif uppercase tracking-widest text-text-muted text-xs">Plant Name</ion-label>
+                    <ion-input [(ngModel)]="newPlant.name" placeholder="e.g. My Monstera"
+                        class="font-display text-lg"></ion-input>
+                </ion-item>
+
+                <ion-item class="vintage-input">
+                    <ion-label position="stacked"
+                        class="font-serif uppercase tracking-widest text-text-muted text-xs">Latin Name</ion-label>
+                    <ion-input [(ngModel)]="newPlant.latin" placeholder="e.g. Monstera Deliciosa"
+                        class="font-serif italic text-sm"></ion-input>
+                </ion-item>
+
+                <ion-item class="vintage-input">
+                    <ion-label position="stacked"
+                        class="font-serif uppercase tracking-widest text-text-muted text-xs">Image URL</ion-label>
+                    <ion-input [(ngModel)]="newPlant.image" placeholder="e.g. https://..."
+                        class="font-sans text-sm"></ion-input>
+                </ion-item>
+
+                <ion-item class="vintage-input">
+                    <ion-label position="stacked"
+                        class="font-serif uppercase tracking-widest text-text-muted text-xs">Current Status</ion-label>
+                    <ion-select [(ngModel)]="newPlant.status" class="font-sans text-sm">
+                        <ion-select-option value="Healthy">Healthy</ion-select-option>
+                        <ion-select-option value="Thirsty">Thirsty</ion-select-option>
+                        <ion-select-option value="Need Sunlight">Need Sunlight</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </div>
+
+            <div class="mt-8 flex gap-3">
+                <button (click)="toggleAddForm()"
+                    class="flex-1 py-3 border border-gray-300 dark:border-gray-700 text-text-muted hover:bg-gray-100 dark:hover:bg-gray-800 font-sans text-sm font-semibold tracking-wide uppercase transition-colors">
+                    Cancel
+                </button>
+                <button (click)="addPlant()"
+                    class="flex-1 py-3 bg-primary text-white hover:bg-primary-dark font-sans text-sm font-semibold tracking-wide uppercase shadow-lg transition-colors">
+                    Save Entry
+                </button>
+            </div>
+        </div>
+    </div>
+</ion-app>
